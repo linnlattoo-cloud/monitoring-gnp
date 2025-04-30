@@ -31,7 +31,6 @@ sudo mv prometheus promtool /usr/local/bin/
 # Move configuration files
 echo "Setting up configuration..."
 sudo mv prometheus.yml /etc/prometheus/
-sudo mv consoles/ console_libraries/ /etc/prometheus/
 
 # Final message
 echo "Prometheus v${VERSION} installation completed successfully!"
