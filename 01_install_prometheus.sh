@@ -1,34 +1,38 @@
 #!/bin/bash
 
-# Exit on error
 set -e
 
+# Set version
+VERSION="3.3.0"
+
 # Download Prometheus tarball
-echo "Downloading Prometheus..."
-wget https://github.com/prometheus/prometheus/releases/download/v2.37.6/prometheus-2.37.6.linux-amd64.tar.gz
+echo "Downloading Prometheus v${VERSION}..."
+wget -q --show-progress "https://github.com/prometheus/prometheus/releases/download/v${VERSION}/prometheus-${VERSION}.linux-amd64.tar.gz"
 
-# Extract the tarball
-echo "Extracting Prometheus..."
-tar xvfz prometheus-2.37.6.linux-amd64.tar.gz
+# Extract
+echo "Extracting files..."
+tar -xzf "prometheus-${VERSION}.linux-amd64.tar.gz"
 
-# Remove the tarball
-echo "Cleaning up..."
-rm prometheus-2.37.6.linux-amd64.tar.gz
+# Clean up the tarball
+echo "Cleaning up downloaded archive..."
+rm -f "prometheus-${VERSION}.linux-amd64.tar.gz"
 
-# Create required directories
-echo "Creating Prometheus directories..."
+# Create necessary directories
+echo "Creating configuration and data directories..."
 sudo mkdir -p /etc/prometheus /var/lib/prometheus
 
-# Change into the extracted directory
-cd prometheus-2.37.6.linux-amd64
+# Move into the extracted folder
+cd "prometheus-${VERSION}.linux-amd64"
 
 # Move binaries to /usr/local/bin
-echo "Installing Prometheus binaries..."
+echo "Installing binaries..."
 sudo mv prometheus promtool /usr/local/bin/
 
 # Move configuration files
-echo "Setting up Prometheus configuration..."
-sudo mv prometheus.yml /etc/prometheus/prometheus.yml
+echo "Setting up configuration..."
+sudo mv prometheus.yml /etc/prometheus/
 sudo mv consoles/ console_libraries/ /etc/prometheus/
 
-echo "Prometheus installation complete."
+# Final message
+echo "Prometheus v${VERSION} installation completed successfully!"
+
