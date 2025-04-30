@@ -26,9 +26,9 @@ rm node_exporter-${VERSION}.linux-amd64.tar.gz
 echo "Creating node_exporter user..."
 useradd -rs /bin/false node_exporter
 
-# Step 6: Move systemd service file
+# Step 6: Copy systemd service file
 echo "Setting up systemd service..."
-mv node_exporter.service /etc/systemd/system/
+cp node_exporter.service /etc/systemd/system/
 
 # Step 7: Reload systemd to pick up new service
 echo "Reloading systemd daemon..."

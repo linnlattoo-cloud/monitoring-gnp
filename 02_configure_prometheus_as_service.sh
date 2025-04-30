@@ -10,9 +10,9 @@ useradd -rs /bin/false prometheus
 echo "Changing ownership of /etc/prometheus and /var/lib/prometheus..."
 chown -R prometheus: /etc/prometheus /var/lib/prometheus
 
-# Step 3: Move systemd service file
-echo "Moving prometheus.service to /etc/systemd/system/..."
-mv prometheus.service /etc/systemd/system/
+# Step 3: Copy systemd service file
+echo "Copying prometheus.service to /etc/systemd/system/..."
+cp prometheus.service /etc/systemd/system/
 
 # Step 4: Reload systemd manager configuration
 echo "Reloading systemd daemon..."
